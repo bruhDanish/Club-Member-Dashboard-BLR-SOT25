@@ -7,21 +7,21 @@ The objective of this project is to build a responsive member dashboard where us
 This project simulates a real-world membership portal and is focused strictly on frontend implementation using mock JSON data and simulated APIs[cite: 2, 5].
 
 ## 🛠️ Tech Stack
-* **Styling:** CSS / Tailwind CSS [cite: 13]
-* **Charts:** Chart.js [cite: 13]
-* **Icons:** Lucide / Font Awesome [cite: 13]
-* **Data Handling:** JavaScript Objects & Arrays [cite: 13]
-* **State Management:** Vanilla JS [cite: 13]
+* **Styling:** CSS / Tailwind CSS
+* **Charts:** Chart.js 
+* **Icons:** Lucide / Font Awesome 
+* **Data Handling:** JavaScript Objects & Arrays 
+* **State Management:** Vanilla JS 
 
 ## ✨ Core Features
-* **Tabbed Navigation:** Switch between dashboard sections without a page reload[cite: 6, 7].
-* **Membership Cards:** Display user plan, renewal date, and status[cite: 7, 9].
-* **Dynamic Charts:** Visualize activity using at least 2 Chart.js charts[cite: 7, 9].
-* **Real-Time Toggle:** Simulate changing datasets using timers or mock data toggling[cite: 6, 7].
-* **Responsive Layout:** Support and adjust for both mobile and desktop screens[cite: 7, 9].
+* **Tabbed Navigation:** Switch between dashboard sections without a page reload.
+* **Membership Cards:** Display user plan, renewal date, and status.
+* **Dynamic Charts:** Visualize activity using at least 2 Chart.js charts.
+* **Real-Time Toggle:** Simulate changing datasets using timers or mock data toggling.
+* **Responsive Layout:** Support and adjust for both mobile and desktop screens.
 
 ## 📂 Folder Structure
-Maintain organized folder structures and reusable components[cite: 14].
+Maintain organized folder structures and reusable components.
 ```text
 project/
 │
