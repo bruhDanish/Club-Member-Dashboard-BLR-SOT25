@@ -2,9 +2,9 @@
 # Member Dashboard for a Club/Gym
 
 ## 📋 Project Objective
-The objective of this project is to build a responsive member dashboard where users can navigate between sections using tabbed navigation, view membership information using status cards, visualize activity and statistics using Chart.js charts, and toggle between different real-time datasets without page reloads[cite: 1]. 
+The objective of this project is to build a responsive member dashboard where users can navigate between sections using tabbed navigation, view membership information using status cards, visualize activity and statistics using Chart.js charts, and toggle between different real-time datasets without page reloads. 
 
-This project simulates a real-world membership portal and is focused strictly on frontend implementation using mock JSON data and simulated APIs[cite: 2, 5].
+This project simulates a real-world membership portal and is focused strictly on frontend implementation using mock JSON data and simulated APIs.
 
 ## 🛠️ Tech Stack
 * **Styling:** CSS / Tailwind CSS
