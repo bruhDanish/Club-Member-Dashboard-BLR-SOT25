@@ -1,20 +1,28 @@
-# LeapX Member Dashboard
+# Club-Member-Dashboard-BLR-SOT25
 
-## Project Overview
-LeapX Member Dashboard is a frontend-only web application designed for a modern gym/club. It provides an intuitive, responsive interface for members to view their real-time membership insights, activity trends, and settings. 
+## 📋 Project Objective
+The objective of this project is to build a responsive member dashboard where users can navigate between sections using tabbed navigation, view membership information using status cards, visualize activity and statistics using Chart.js charts, and toggle between different real-time datasets without page reloads. 
 
-The dashboard operates entirely on the client side using mock data and simulated real-time updates without page reloads, ensuring a fast and seamless user experience.
+This project simulates a real-world membership portal and is focused strictly on frontend implementation using mock JSON data and simulated APIs.
 
-## Tech Stack
-- **HTML5**: Semantic structure.
-- **CSS3**: Vanilla CSS with Grid, Flexbox, custom variables, and a sleek dark theme.
-- **JavaScript**: Vanilla JS for logic, state management, and real-time simulation.
-- **Chart.js**: Integrated via CDN for interactive line and doughnut charts.
-- **Font Awesome**: Integrated via CDN for UI icons.
+## 🛠️ Tech Stack
+* **Styling:** CSS / Tailwind CSS
+* **Charts:** Chart.js 
+* **Icons:** Lucide / Font Awesome 
+* **Data Handling:** JavaScript Objects & Arrays 
+* **State Management:** Vanilla JS 
 
-## Folder Structure
-```
-CLUB-MEMBER-DASHBOARD-BLR-SOT25/
+## ✨ Core Features
+* **Tabbed Navigation:** Switch between dashboard sections without a page reload.
+* **Membership Cards:** Display user plan, renewal date, and status.
+* **Dynamic Charts:** Visualize activity using at least 2 Chart.js charts.
+* **Real-Time Toggle:** Simulate changing datasets using timers or mock data toggling.
+* **Responsive Layout:** Support and adjust for both mobile and desktop screens.
+
+## 📂 Folder Structure
+Maintain organized folder structures and reusable components.
+```text
+project/
 │
 ├── index.html
 ├── css/
@@ -26,36 +34,3 @@ CLUB-MEMBER-DASHBOARD-BLR-SOT25/
 │   └── data.js
 ├── assets/
 │   └── icons/
-├── README.md
-├── setup-checklist.md
-├── coding-guidelines.md
-└── project-understanding-notes.md
-```
-
-## How to Run Project
-Since this is a frontend-only project with no build step required:
-1. Clone the repository or download the project files.
-2. Open the `index.html` file directly in any modern web browser (Chrome, Firefox, Safari, Edge).
-3. The dashboard will load the Overview tab by default and start simulating real-time updates.
-
-## Features
-- **Tabbed Navigation**: Smooth transition between Overview, Analytics, and Settings without page reload.
-- **Live Membership Cards**: Displaying dynamic data like Rewards Points, Total Sessions, and Membership Status.
-- **Interactive Charts**: Activity Trends and Membership Usage visualizations with toggleable Weekly/Monthly/Yearly datasets.
-- **Real-Time Data Simulation**: Elements on the screen update dynamically using simulated intervals to mimic a live connection.
-- **Responsive Design**: Carefully crafted layout that adapts to Desktop, Tablet, and Mobile devices perfectly.
-
-## GitHub Flow
-Follow the standard GitHub flow for contributions:
-1. Create a feature branch (`feature/your-feature-name`).
-2. Commit changes following the conventions outlined in `coding-guidelines.md`.
-3. Push to your branch and create a Pull Request.
-
-## Future Scope
-- Integration with a real backend API for actual member data.
-- User authentication and login portal.
-- Implementation of an actual payment/renewal gateway.
-- Push notifications via WebSockets.
-
----
-*Note: This is a frontend-only member dashboard project using HTML, CSS, JavaScript, Chart.js, and mock data.*
