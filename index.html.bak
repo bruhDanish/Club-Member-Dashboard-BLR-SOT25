@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate Fitness | Member Access & Performance Dashboard</title>
+    <meta name="description" content="Premium fitness tracking, member analytics, and real-time training dashboard.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome & Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Tailwind CSS with custom config to disable Preflight -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* SCOPED LANDING PAGE SYSTEM */
+        #landing-page-container {
+            --bg:#080808;--surf:#141414;--border:rgba(255,255,255,0.07);--text:#f0ede0;--text2:#888580;--text3:#4a4845;--accent:#e8972a;--accent-glow:rgba(232,151,42,0.25);
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            transition: background .3s, color .3s;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+        }
+        #landing-page-container .shine{background:linear-gradient(135deg,#ffffff 0%,#e8e0d0 40%,#ffffff 70%,#e8e0d0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:shineMove 5s linear infinite}
+        #landing-page-container .shine-static{background:linear-gradient(135deg,#ffffff 0%,#e0d8c8 50%,#ffffff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        @keyframes shineMove{0%{background-position:0% center}100%{background-position:200% center}}
+        [data-theme=light] #landing-page-container {--bg:#f5f0e8;--surf:rgba(255,255,255,0.90);--border:rgba(0,0,0,0.08);--text:#1a1814;--text2:#6a6560;--text3:#a09890;--accent:#c07820;--accent-glow:rgba(192,120,32,0.20)}
+        [data-theme=light] #landing-page-container .sh{background:linear-gradient(135deg,#1a1814 0%,#3a2e20 50%,#1a1814 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        [data-theme=light] #landing-page-container .feat-title{color:#1a1814!important;background:none;-webkit-text-fill-color:initial}
+        [data-theme=light] #landing-page-container .stag{color:var(--accent)!important}
+        [data-theme=light] #landing-page-container .section{background:#f0ece4}
+        [data-theme=light] #landing-page-container .cta-sec{background:#e8e4dc}
+        [data-theme=light] #landing-page-container .feat-card{background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.08);box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+        [data-theme=light] #landing-page-container .hero-eyebrow{background:rgba(0,0,0,0.06);border-color:rgba(0,0,0,0.12);color:var(--text2)}
+        #landing-page-container *, #landing-page-container *::before, #landing-page-container *::after{box-sizing:border-box;margin:0;padding:0}
+        
+        #landing-page-container .announce{background:#1a1814;border-bottom:1px solid rgba(255,255,255,0.06);height:38px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);letter-spacing:.5px}
+        #landing-page-container .announce a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(232,151,42,0.4);cursor:pointer;transition:color .2s}
+        #landing-page-container nav{position:sticky;top:0;z-index:100;height:64px;background:rgba(8,8,8,0.88);backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 48px;gap:8px;transition:background .3s}
+        [data-theme=light] #landing-page-container nav{background:rgba(245,240,232,0.90)}
+        #landing-page-container .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px}
+        #landing-page-container .nav-icon{width:34px;height:34px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#1a1a1a;}
+        #landing-page-container .nav-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2.5px;color:var(--text)}
+        #landing-page-container .nav-link{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:6px 14px;border-radius:8px;transition:color .2s,background .2s}
+        #landing-page-container .nav-link:hover{color:var(--text);background:var(--border)}
+        #landing-page-container .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+        #landing-page-container .theme-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surf);border:1px solid var(--border);border-radius:20px;padding:4px 14px 4px 5px;cursor:pointer;transition:all .2s;user-select:none}
+        #landing-page-container .theme-pill:hover{border-color:rgba(232,151,42,0.40)}
+        #landing-page-container .theme-knob{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .3s,background .3s;color:#1a1a1a;}
+        #landing-page-container .theme-pill-lbl{font-size:11px;font-weight:600;color:var(--text2);letter-spacing:.5px;width:30px}
+        #landing-page-container .btn-nav-login{background:var(--text);color:var(--bg);border:none;border-radius:9px;padding:8px 20px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s,transform .15s;letter-spacing:.3px}
+        #landing-page-container .btn-nav-login:hover{opacity:.85;transform:translateY(-1px)}
+        #landing-page-container .hero{min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+        #landing-page-container .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=85') center/cover no-repeat}
+        #landing-page-container .hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(8,8,8,0.88) 0%,rgba(8,8,8,0.60) 50%,rgba(8,8,8,0.30) 100%)}
+        #landing-page-container .hero-overlay2{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,1) 0%,transparent 40%)}
+        [data-theme=light] #landing-page-container .hero-overlay{background:linear-gradient(105deg,rgba(8,8,8,0.82) 0%,rgba(8,8,8,0.55) 50%,rgba(8,8,8,0.20) 100%)}
+        [data-theme=light] #landing-page-container .hero-overlay2{background:linear-gradient(to top,var(--bg) 0%,transparent 40%)}
+        #landing-page-container .hero-content{position:relative;z-index:2;padding:0 80px;max-width:860px}
+        #landing-page-container .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 16px;margin-bottom:28px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.70)}
+        #landing-page-container .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+        #landing-page-container .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(70px,11vw,130px);letter-spacing:3px;line-height:.92;color:#ffffff;margin-bottom:10px}
+        #landing-page-container .hero h1 .hl{background:linear-gradient(135deg,#ffffff 0%,#e8e0d0 40%,#ffffff 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:shineMove 5s linear infinite;display:inline-block}
+        #landing-page-container .hero-sub-line{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);letter-spacing:3px;color:rgba(255,255,255,0.14);margin-bottom:28px}
+        #landing-page-container .hero-desc{font-size:17px;line-height:1.75;color:rgba(255,255,255,0.62);max-width:480px;margin-bottom:40px;font-weight:300}
+        #landing-page-container .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:60px}
+        #landing-page-container .btn-primary{background:var(--accent);color:#1a1a1a;border:none;border-radius:12px;padding:16px 38px;font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:2px;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 8px 32px var(--accent-glow)}
+        #landing-page-container .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 48px var(--accent-glow)}
+        #landing-page-container .btn-outline{background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.22);border-radius:12px;padding:16px 38px;font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:2px;cursor:pointer;backdrop-filter:blur(10px);transition:all .2s}
+        #landing-page-container .btn-outline:hover{background:rgba(255,255,255,0.12);transform:translateY(-3px)}
+        #landing-page-container .hero-stats{display:flex;gap:48px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.08);position:relative;z-index:2;padding-left:80px}
+        #landing-page-container .hstat-num{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:1.5px;color:#ffffff;text-shadow:0 0 20px rgba(255,255,255,0.15)}
+        #landing-page-container .hstat-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.40);margin-top:2px}
+        #landing-page-container .section{padding:96px 80px;background:var(--bg)}
+        #landing-page-container .stag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.40);font-weight:700;margin-bottom:10px}
+        #landing-page-container .sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,64px);letter-spacing:2px;margin-bottom:14px;background:linear-gradient(135deg,#ffffff 0%,#e8e0d0 50%,#ffffff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        #landing-page-container .ssub{font-size:15px;color:var(--text2);max-width:480px;line-height:1.75;margin-bottom:56px}
+        #landing-page-container .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        #landing-page-container .feat-card{background:var(--surf);border:1px solid var(--border);border-radius:16px;padding:30px 26px;transition:all .2s;position:relative;overflow:hidden}
+        #landing-page-container .feat-card::before{content:'';position:absolute;top:-60px;right:-60px;width:140px;height:140px;border-radius:50%;background:var(--accent-glow);opacity:0;transition:opacity .3s}
+        #landing-page-container .feat-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.12);box-shadow:0 12px 40px rgba(0,0,0,0.5)}
+        #landing-page-container .feat-card:hover::before{opacity:.5}
+        #landing-page-container .feat-icon{font-size:30px;margin-bottom:16px}
+        #landing-page-container .feat-title{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:1.5px;margin-bottom:9px;color:#f0ede0}
+        #landing-page-container .feat-desc{font-size:13px;color:var(--text2);line-height:1.7}
+        #landing-page-container .split{display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+        #landing-page-container .split-img{background:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=85') center/cover;min-height:480px}
+        #landing-page-container .split-body{background:#0f0d0a;padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+        [data-theme=light] #landing-page-container .split-body{background:#1a1612}
+        #landing-page-container .check-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px}
+        #landing-page-container .check-list li{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(240,237,224,0.60)}
+        #landing-page-container .check-list li::before{content:'✓';color:var(--accent);font-weight:700;font-size:15px;flex-shrink:0}
+        #landing-page-container .marquee-section{background:#0f0d0a;padding:48px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
+        [data-theme=light] #landing-page-container .marquee-section{background:#1a1612}
+        #landing-page-container .marquee-label{text-align:center;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:28px}
+        #landing-page-container .marquee-track{display:flex;gap:32px;animation:marquee 24s linear infinite;width:max-content}
+        @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        #landing-page-container .marquee-item{display:flex;align-items:center;gap:10px;background:var(--surf);border:1px solid var(--border);border-radius:40px;padding:10px 18px 10px 10px;flex-shrink:0}
+        #landing-page-container .m-av{width:32px;height:32px;border-radius:50%;background:var(--accent-glow);color:var(--accent);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid rgba(232,151,42,0.30)}
+        #landing-page-container .m-name{font-size:12px;font-weight:600;color:var(--text)}
+        #landing-page-container .m-goal{font-size:10px;color:var(--text3)}
+        #landing-page-container .cta-sec{padding:96px 80px;text-align:center;background:var(--bg)}
+        #landing-page-container .cta-inner{max-width:680px;margin:0 auto}
+        #landing-page-container .cta-glow{width:280px;height:280px;border-radius:50%;background:rgba(232,151,42,0.08);filter:blur(80px);position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;opacity:.6}
+        #landing-page-container .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+        #landing-page-container footer{background:#050505;border-top:1px solid var(--border);padding:36px 80px;display:flex;align-items:center;justify-content:space-between}
+        #landing-page-container .foot-brand{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:var(--text3)}
+        #landing-page-container .foot-copy{font-size:11px;color:var(--text3)}
+        @media(max-width:900px){
+          #landing-page-container .hero-content{padding:0 32px}
+          #landing-page-container .hero-stats{padding-left:32px;gap:28px;flex-wrap:wrap}
+          #landing-page-container .section{padding:64px 32px}
+          #landing-page-container .feat-grid{grid-template-columns:1fr}
+          #landing-page-container .split{grid-template-columns:1fr}
+          #landing-page-container .split-img{min-height:260px}
+          #landing-page-container .split-body{padding:48px 32px}
+          #landing-page-container nav{padding:0 24px}
+          #landing-page-container .nav-link{display:none}
+          #landing-page-container footer{flex-direction:column;gap:10px;padding:28px 24px;text-align:center}
+          #landing-page-container .cta-sec{padding:64px 32px}
+        }
+</head>
+<body>
+    <div id="landing-page-container">
+        <div class="announce">🔥 New: Elite Annual Plans now 20% off — <a class="trigger-signup" style="cursor:pointer;">Claim yours →</a></div>
+
+        <nav>
+          <a class="nav-brand" href="#">
+            <div class="nav-icon">🏋️</div>
+            <span class="nav-name">Elevate Fitness</span>
+          </a>
+          <a class="nav-link" href="#features">Features</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#cta">Plans</a>
+          <div class="nav-right">
+            <div class="theme-pill" id="theme-toggle-landing">
+              <div class="theme-knob" id="themeKnob">🌙</div>
+              <span class="theme-pill-lbl" id="themeLbl">Dark</span>
+            </div>
+            <button class="btn-nav-login trigger-login">Login →</button>
+          </div>
+        </nav>
+
+        <section class="hero">
+          <div class="hero-bg"></div>
+          <div class="hero-overlay"></div>
+          <div class="hero-overlay2"></div>
+          <div class="hero-content">
+            <div class="hero-eyebrow"><div class="hero-dot"></div>10,000+ Members Training Now</div>
+            <h1>PUSH<br/>YOUR <span class="hl">LIMITS</span></h1>
+            <div class="hero-sub-line">NO EXCUSES. ONLY RESULTS.</div>
+            <p class="hero-desc">World-class coaching, real-time performance analytics, and a community that refuses to quit. Your transformation starts the moment you walk in.</p>
+            <div class="hero-btns">
+              <button class="btn-primary trigger-signup">Start Free Trial</button>
+              <button class="btn-outline" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Explore Features</button>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div><div class="hstat-num">10K+</div><div class="hstat-lbl">Active Members</div></div>
+            <div><div class="hstat-num">50+</div><div class="hstat-lbl">Expert Trainers</div></div>
+            <div><div class="hstat-num">95%</div><div class="hstat-lbl">Retention Rate</div></div>
+            <div><div class="hstat-num">12 Yrs</div><div class="hstat-lbl">Of Excellence</div></div>
+          </div>
+        </section>
+
+        <div class="marquee-section">
+          <div class="marquee-label">Our Members</div>
+          <div class="marquee-track" id="marqueeTrack"></div>
+        </div>
+
+        <section class="section" id="features">
+          <div class="stag">Why Elevate</div>
+          <h2 class="sh">BUILT FOR CHAMPIONS</h2>
+          <p class="ssub">Everything you need to train smarter, track progress, and crush your goals — all in one premium platform.</p>
+          <div class="feat-grid">
+            <div class="feat-card"><div class="feat-icon">📊</div><div class="feat-title">Real-Time Analytics</div><div class="feat-desc">Track every rep, calorie and session with beautiful weekly, monthly and yearly trend charts.</div></div>
+            <div class="feat-card"><div class="feat-icon">🏆</div><div class="feat-title">Milestone Tracking</div><div class="feat-desc">Set goals, track progress with visual bars, and celebrate every personal record you break.</div></div>
+            <div class="feat-card"><div class="feat-icon">⚡</div><div class="feat-title">Elite Membership</div><div class="feat-desc">Standard or Elite — unlock premium coaching, advanced metrics, and priority class access.</div></div>
+            <div class="feat-card"><div class="feat-icon">🔥</div><div class="feat-title">Streak System</div><div class="feat-desc">Build unstoppable habits with our daily streak tracker that rewards consistent dedication.</div></div>
+            <div class="feat-card"><div class="feat-icon">👤</div><div class="feat-title">Personal Dashboard</div><div class="feat-desc">Your own analytics hub — goals, plan, exercise breakdown, and retention score in one view.</div></div>
+            <div class="feat-card"><div class="feat-icon">🌙</div><div class="feat-title">Dark & Light Modes</div><div class="feat-desc">Comfortable on every screen, any time of day — seamless theme switching at your fingertip.</div></div>
+          </div>
+        </section>
+
+        <div class="split" id="about">
+          <div class="split-img"></div>
+          <div class="split-body">
+            <div class="stag">Our Philosophy</div>
+            <h2 class="sh">TRAIN SMARTER,<br/>NOT HARDER</h2>
+            <p class="ssub" style="color:#888580;max-width:400px">Data-driven insights combined with elite coaching to push you to peak performance, sustainably.</p>
+            <ul class="check-list">
+              <li>Personalised workout &amp; nutrition tracking</li>
+              <li>Weekly, monthly and yearly trend analysis</li>
+              <li>Exercise type breakdown with doughnut charts</li>
+              <li>Retention scoring and streak rewards</li>
+              <li>10 pre-loaded member profiles to explore</li>
+              <li>Instant dark / light mode for comfort</li>
+            </ul>
+          </div>
+        </div>
+
+        <section class="cta-sec" id="cta" style="position:relative;overflow:hidden">
+          <div class="cta-glow"></div>
+          <div class="cta-inner" style="position:relative;z-index:2">
+            <div class="stag">Get Started</div>
+            <h2 class="sh">READY TO ELEVATE?</h2>
+            <p class="ssub" style="margin:0 auto;text-align:center">Join thousands of members transforming their lives. Your journey to peak performance starts today.</p>
+            <div class="cta-btns">
+              <button class="btn-primary trigger-signup">Create Free Account</button>
+              <button class="btn-outline trigger-login" style="background:rgba(232,151,42,0.06);color:var(--accent);border-color:rgba(232,151,42,0.30)">Member Login</button>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <span class="foot-brand">Elevate Fitness</span>
+          <span class="foot-copy">©️ 2026 Elevate Fitness. All rights reserved.</span>
+        </footer>
+    </div>
+        <!-- BACKGROUND MUSIC ASSET -->
+        <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" loop></audio>
+
+        <!-- FLOATING MUSIC TOGGLE BUTTON -->
+        <div class="audio-controller">
+          <div class="audio-status" id="audio-status-text">MUSIC OFF</div>
+          <button id="audio-toggle" class="audio-btn" title="Toggle Audio">
+            <i class="fa-solid fa-volume-xmark"></i>
+          </button>
+        </div>
+
+        <div class="announce" style="background: var(--accent); color: #000; text-align: center; padding: 8px 15px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; z-index: 1001; position: relative;">
+            <i class="fa-solid fa-bolt" style="margin-right: 5px;"></i> <span>Welcome to the new standard.</span> <a href="#" style="color: #000; text-decoration: underline; margin-left: 5px;">Explore Elite</a>
+        </div>
+
+        <nav>
+            <a href="#" class="nav-brand">
+                <div class="nav-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="nav-name">Elite Fitness</div>
+            </a>
+            
+            <a href="#" class="nav-link">Locations</a>
+            <a href="#" class="nav-link">Personal Training</a>
+            <a href="#" class="nav-link">Group Classes</a>
+            <a href="#" class="nav-link">Recovery</a>
+
+            <div class="nav-right">
+                <div class="theme-pill" id="theme-toggle-landing">
+                    <div class="theme-knob" id="themeKnob">🌙</div>
+                    <span class="theme-pill-lbl" id="themeLbl">DARK</span>
+                </div>
+                <button class="btn-nav-login trigger-login">Member Login</button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-overlay2"></div>
+            
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <div class="hero-dot"></div> Now open in New York
+                </div>
+                <h1><span class="shine">Redefine</span><br>Your Limits</h1>
+                <p class="hero-desc">Experience unparalleled luxury and elite performance in a space designed for those who demand the absolute best from themselves.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary trigger-signup">Join The Elite</button>
+                    <button class="btn-outline">View Virtual Tour</button>
+                </div>
+            </div>
+
+            <div class="hero-stats">
+                <div>
+                    <div class="hstat-num">24/7</div>
+                    <div class="hstat-lbl">Premium Access</div>
+                </div>
+                <div>
+                    <div class="hstat-num">50+</div>
+                    <div class="hstat-lbl">Elite Trainers</div>
+                </div>
+                <div>
+                    <div class="hstat-num">3</div>
+                    <div class="hstat-lbl">Recovery Pools</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee Section -->
+        <section class="marquee-section">
+            <div class="marquee-label">Trusted by industry leaders and professional athletes</div>
+            <div class="marquee-track">
+                <!-- Group 1 -->
+                <div class="marquee-item"><div class="m-av">AS</div><div><div class="m-name">Alex S.</div><div class="m-goal">Marathon Prep</div></div></div>
+                <div class="marquee-item"><div class="m-av" style="background: rgba(225, 48, 108, 0.2); color:#e1306c; border-color:rgba(225,48,108,0.3);">MJ</div><div><div class="m-name">Michael J.</div><div class="m-goal">Strength</div></div></div>
+                <div class="marquee-item"><div class="m-av">SK</div><div><div class="m-name">Sarah K.</div><div class="m-goal">Hyrox Elite</div></div></div>
+                <div class="marquee-item"><div class="m-av" style="background: rgba(37, 211, 102, 0.2); color:#25d366; border-color:rgba(37,211,102,0.3);">DR</div><div><div class="m-name">David R.</div><div class="m-goal">Powerlifting</div></div></div>
+                <div class="marquee-item"><div class="m-av">EL</div><div><div class="m-name">Emma L.</div><div class="m-goal">Recovery focus</div></div></div>
+                <!-- Group 2 (Duplicate for smooth scroll) -->
+                <div class="marquee-item"><div class="m-av">AS</div><div><div class="m-name">Alex S.</div><div class="m-goal">Marathon Prep</div></div></div>
+                <div class="marquee-item"><div class="m-av" style="background: rgba(225, 48, 108, 0.2); color:#e1306c; border-color:rgba(225,48,108,0.3);">MJ</div><div><div class="m-name">Michael J.</div><div class="m-goal">Strength</div></div></div>
+                <div class="marquee-item"><div class="m-av">SK</div><div><div class="m-name">Sarah K.</div><div class="m-goal">Hyrox Elite</div></div></div>
+                <div class="marquee-item"><div class="m-av" style="background: rgba(37, 211, 102, 0.2); color:#25d366; border-color:rgba(37,211,102,0.3);">DR</div><div><div class="m-name">David R.</div><div class="m-goal">Powerlifting</div></div></div>
+                <div class="marquee-item"><div class="m-av">EL</div><div><div class="m-name">Emma L.</div><div class="m-goal">Recovery focus</div></div></div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="section">
+            <div class="stag">The Ecosystem</div>
+            <h2 class="sh">Beyond a Gym.</h2>
+            <p class="ssub">We've engineered an environment that removes all friction between you and your absolute physical peak.</p>
+            
+            <div class="feat-grid">
+                <div class="feat-card">
+                    <i class="fa-solid fa-dumbbell feat-icon"></i>
+                    <h3 class="feat-title">Olympic Standard Equipment</h3>
+                    <p class="feat-desc">Train with calibrated plates, competition racks, and bespoke isolation machines engineered for flawless biomechanics.</p>
+                </div>
+                <div class="feat-card">
+                    <i class="fa-solid fa-heart-pulse feat-icon"></i>
+                    <h3 class="feat-title">Biometric Tracking</h3>
+                    <p class="feat-desc">In-house DEXA scans, VO2 Max testing, and real-time heart rate zones integrated directly into your dashboard.</p>
+                </div>
+                <div class="feat-card">
+                    <i class="fa-solid fa-droplet feat-icon"></i>
+                    <h3 class="feat-title">Contrast Therapy</h3>
+                    <p class="feat-desc">Accelerate recovery with our private infrared saunas and precision-chilled 3°C cold plunge pools.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Faculty Section (Celebrity Trainers) -->
+        <section class="faculty-section">
+            <div class="faculty-heading">
+                <div class="stag">The Architects</div>
+                <h2 class="sh">Train with the Best</h2>
+                <p class="ssub">Our faculty consists of former Olympians, elite powerlifters, and conditioning specialists who have built world champions.</p>
+            </div>
+            
+            <div class="faculty-container">
+                <div class="faculty-card">
+                    <div class="faculty-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=800" alt="Trainer 1">
+                    </div>
+                    <div class="faculty-info">
+                        <div>
+                            <h3>Marcus Thorne</h3>
+                            <p>Head of Strength</p>
+                        </div>
+                        <span class="experience">12 YRS</span>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=800" alt="Trainer 2">
+                    </div>
+                    <div class="faculty-info">
+                        <div>
+                            <h3>Elena Vance</h3>
+                            <p>Mobility & Recovery</p>
+                        </div>
+                        <span class="experience">8 YRS</span>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800" alt="Trainer 3">
+                    </div>
+                    <div class="faculty-info">
+                        <div>
+                            <h3>David Kim</h3>
+                            <p>Hyrox Specialist</p>
+                        </div>
+                        <span class="experience">10 YRS</span>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1609899517236-77f240248a31?auto=format&fit=crop&q=80&w=800" alt="Trainer 4">
+                    </div>
+                    <div class="faculty-info">
+                        <div>
+                            <h3>Sarah Jenkins</h3>
+                            <p>Olympic Weightlifting</p>
+                        </div>
+                        <span class="experience">15 YRS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gym Athlete Showcase -->
+        <section class="gym-showcase">
+            <div class="showcase-heading">
+                <div class="stag">The Community</div>
+                <h2 class="sh">Built Different</h2>
+                <p class="ssub">Join a culture of relentless pursuit. Our floors are shared by industry leaders, professional athletes, and those who refuse to settle.</p>
+            </div>
+            
+            <div class="showcase-container">
+                <div class="showcase-card">
+                    <img src="https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&q=80&w=800" alt="Athlete">
+                    <div class="showcase-content"><h3>Intensity</h3></div>
+                </div>
+                <div class="showcase-card" style="margin-top: 40px;">
+                    <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=800" alt="Athlete">
+                    <div class="showcase-content"><h3>Focus</h3></div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=800" alt="Athlete">
+                    <div class="showcase-content"><h3>Power</h3></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Split Philosophy -->
+        <section class="split">
+            <div class="split-img"></div>
+            <div class="split-body">
+                <div class="stag">The Philosophy</div>
+                <h2 class="sh">No Distractions.<br>Just Results.</h2>
+                <p class="ssub">We stripped away the gimmicks to create a pure training environment. What remains is a cathedral of iron, technology, and sheer will.</p>
+                
+                <ul class="check-list">
+                    <li>Strict equipment caps (No waiting)</li>
+                    <li>Acoustically treated interior</li>
+                    <li>Air purification system (MERV 13)</li>
+                    <li>Towels and premium grooming provided</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Plans & Membership -->
+        <section class="plans">
+            <div class="plans-heading">
+                <div class="stag">Membership</div>
+                <h2 class="sh">Access the Elite</h2>
+                <p class="ssub">Select the tier that aligns with your ambitions. Memberships are capped to ensure maximum exclusivity and zero crowding.</p>
+            </div>
+            
+            <div class="plans-container">
+                <div class="plan-card">
+                    <h3>Classic</h3>
+                    <h1>$149<span>/mo</span></h1>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> 24/7 Facility Access</li>
+                        <li><i class="fa-solid fa-check"></i> 1 InBody Scan per month</li>
+                        <li><i class="fa-solid fa-check"></i> Towel Service</li>
+                    </ul>
+                    <button class="trigger-signup">Select Classic</button>
+                </div>
+                <div class="plan-card active-plan">
+                    <div class="tag">Most Popular</div>
+                    <h3>Elite</h3>
+                    <h1>$249<span>/mo</span></h1>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Everything in Classic</li>
+                        <li><i class="fa-solid fa-check"></i> Unlimited Recovery (Plunge/Sauna)</li>
+                        <li><i class="fa-solid fa-check"></i> 4 Guest Passes / mo</li>
+                        <li><i class="fa-solid fa-check"></i> Priority Class Booking</li>
+                    </ul>
+                    <button class="trigger-signup">Select Elite</button>
+                </div>
+                <div class="plan-card">
+                    <h3>Pro</h3>
+                    <h1>$499<span>/mo</span></h1>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Everything in Elite</li>
+                        <li><i class="fa-solid fa-check"></i> 4 Personal Training Sessions / mo</li>
+                        <li><i class="fa-solid fa-check"></i> Weekly VO2/DEXA Tracking</li>
+                        <li><i class="fa-solid fa-check"></i> Dedicated Locker</li>
+                    </ul>
+                    <button class="trigger-signup">Select Pro</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Radial Socials -->
+        <section class="community-section">
+            <div class="community-heading">
+                <div class="stag">Digital Ecosystem</div>
+                <h2 class="sh">Join the Movement</h2>
+                <p class="ssub">Stay connected with our global community. Daily programming, nutrition protocols, and exclusive interviews.</p>
+            </div>
+            
+            <div class="community-container">
+                <div class="community-card insta-card">
+                    <div class="community-content">
+                        <i class="fa-brands fa-instagram"></i>
+                        <h3>Instagram</h3>
+                        <p>Daily form checks, athlete takeovers, and behind-the-scenes at our flagship locations.</p>
+                        <a href="#">@EliteFitness</a>
+                    </div>
+                </div>
+                <div class="community-card yt-card">
+                    <div class="community-content">
+                        <i class="fa-brands fa-youtube"></i>
+                        <h3>YouTube</h3>
+                        <p>Deep-dive podcasts with nutritionists, full follow-along mobility flows, and documentaries.</p>
+                        <a href="#">Subscribe Now</a>
+                    </div>
+                </div>
+                <div class="community-card whatsapp-card">
+                    <div class="community-content">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p>Join the members-only broadcast channel for immediate gym updates and flash challenges.</p>
+                        <a href="#">Join Channel</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Perspective App Store Section -->
+        <section class="app-section">
+            <div class="app-container">
+                <div class="app-content">
+                    <div class="stag">The App</div>
+                    <h2>Your Dashboard<br>In Your Pocket</h2>
+                    <p>Track your PRs, book recovery sessions, unlock the doors via NFC, and view real-time gym capacity directly from your phone. Built for peak efficiency.</p>
+                    <div class="store-buttons">
+                        <a href="#" class="store-btn">
+                            <i class="fa-brands fa-apple"></i>
+                            <div>
+                                <span>Download on the</span>
+                                <h4>App Store</h4>
+                            </div>
+                        </a>
+                        <a href="#" class="store-btn">
+                            <i class="fa-brands fa-google-play"></i>
+                            <div>
+                                <span>GET IT ON</span>
+                                <h4>Google Play</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="phones-container">
+                    <div class="phone-card phone-1">
+                        <img src="https://images.unsplash.com/photo-1612056076123-5e927005e8fb?auto=format&fit=crop&w=400&q=80" alt="App Screen 1">
+                    </div>
+                    <div class="phone-card phone-2">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80" alt="App Screen 2">
+                    </div>
+                    <div class="phone-card phone-3">
+                        <img src="https://images.unsplash.com/photo-1616450516766-9c4cb1ea2360?auto=format&fit=crop&w=400&q=80" alt="App Screen 3">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Bottom Section -->
+        <section class="cta-sec">
+            <div class="cta-glow"></div>
+            <div class="cta-inner">
+                <h2 class="sh" style="font-size: clamp(48px, 6vw, 80px);">Ready to Evolve?</h2>
+                <p class="ssub" style="margin: 0 auto 40px auto; color: #fff;">Stop compromising. Experience the pinnacle of physical conditioning environments.</p>
+                <div class="cta-btns">
+                    <button class="btn-primary trigger-signup">Start Your Journey</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Luxury Footer -->
+        <footer class="footer">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                        <h2>Elite Fitness</h2>
+                    </div>
+                    <p>A premium training sanctuary engineered for the dedicated few. Push beyond your limits in an environment built for greatness.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <a href="#">About Us</a>
+                    <a href="#">Locations</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Contact</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Members</h3>
+                    <a href="#" class="trigger-login">Dashboard Login</a>
+                    <a href="#">Class Schedule</a>
+                    <a href="#">Personal Training</a>
+                    <a href="#">FAQ</a>
+                </div>
+
+                <div class="footer-app">
+                    <h3>Get The App</h3>
+                    <a href="#" class="footer-store-btn">
+                        <i class="fa-brands fa-apple"></i>
+                        <div>
+                            <span>Download on the</span>
+                            <h4>App Store</h4>
+                        </div>
+                    </a>
+                    <a href="#" class="footer-store-btn">
+                        <i class="fa-brands fa-google-play"></i>
+                        <div>
+                            <span>GET IT ON</span>
+                            <h4>Google Play</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Elite Fitness. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- AUDIO TOGGLE LOGIC SCRIPT -->
+        <script>
+          (function() {
+            const bgMusic = document.getElementById('bg-music');
+            const audioToggle = document.getElementById('audio-toggle');
+            const statusText = document.getElementById('audio-status-text');
+            if (bgMusic && audioToggle && statusText) {
+              const icon = audioToggle.querySelector('i');
+              bgMusic.volume = 0.4;
+              audioToggle.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                  bgMusic.play().then(() => {
+                    if (icon) {
+                      icon.className = 'fa-solid fa-volume-high';
+                    }
+                    statusText.innerText = "MUSIC ON";
+                    audioToggle.style.background = 'white';
+                    audioToggle.style.color = 'black';
+                  }).catch(err => {
+                    console.error("Audio playback prevented:", err);
+                  });
+                } else {
+                  bgMusic.pause();
+                  if (icon) {
+                    icon.className = 'fa-solid fa-volume-xmark';
+                  }
+                  statusText.innerText = "MUSIC OFF";
+                  audioToggle.style.background = 'rgba(0, 0, 0, 0.6)';
+                  audioToggle.style.color = 'white';
+                }
+              });
+            }
+          })();
+        </script>
+
+    </div>
+
+    <!-- 2. Global Dashboard Dot Grid Background -->
+    <div class="dashboard-grid"></div>
+
+    <!-- 3. Auth Overlay (Login/Signup Forms) -->
+    <div id="login-overlay" class="login-overlay hidden">
+        <div class="auth-grid"></div>
+        <div class="auth-orb auth-orb1"></div>
+        <div class="auth-orb auth-orb2"></div>
+        <div class="auth-orb auth-orb3"></div>
+
+        <!-- LOGIN CARD -->
+        <div class="page active" id="login-form-container">
+            <div class="card">
+                <span class="badge">Members Only</span>
+
+                <div class="logo">
+                    <div class="logo-icon">&#127947;&#65039;</div>
+                    <div>
+                        <span class="logo-text">Elevate Fitness</span>
+                        <span class="logo-sub">Train. Evolve. Elevate.</span>
+                    </div>
+                </div>
+
+                <h1>Welcome Back</h1>
+                <p class="subtitle">Sign in to access your training dashboard</p>
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="login-name" placeholder="John Doe" />
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" placeholder="you@example.com" />
+                </div>
+
+                <p id="login-error" class="text-danger" style="display: none; margin-top: 1rem; font-weight: 500; font-size: 14px; text-align: center;"></p>
+
+                <button id="login-submit-btn" class="btn-primary">Sign In</button>
+
+                <div class="divider">or continue with</div>
+
+                <button class="social-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="switch-link" style="margin-top:24px;">
+                    Don't have an account? <a href="#" id="show-signup-link">Create one &rarr;</a>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="#" class="back-to-home" style="color: var(--muted-text); font-size: 13px; text-decoration: none; font-weight: 500;">&larr; Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIGNUP CARD -->
+        <div class="page" id="signup-form-container" style="display: none;">
+            <div class="card">
+                <span class="badge">Join Now</span>
+
+                <div class="logo">
+                    <div class="logo-icon">&#127947;&#65039;</div>
+                    <div>
+                        <span class="logo-text">Elevate Fitness</span>
+                        <span class="logo-sub">Train. Evolve. Elevate.</span>
+                    </div>
+                </div>
+
+                <h1>Start Training</h1>
+                <p class="subtitle">Create your free account and crush your goals</p>
+
+                <div class="row-2">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="signup-first-name" placeholder="Alex" />
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="signup-last-name" placeholder="Smith" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signup-email" placeholder="you@example.com" />
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="signup-phone" placeholder="+91 00000 00000" />
+                </div>
+
+                <div class="check-row">
+                    <input type="checkbox" id="terms-check" />
+                    <label for="terms-check">I agree to the
+                        <a style="cursor:pointer;">Terms &amp; Conditions</a> and
+                        <a style="cursor:pointer;">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <p id="signup-error" class="text-danger" style="display: none; margin-top: 1rem; font-weight: 500; font-size: 14px; text-align: center;"></p>
+
+                <button id="signup-submit-btn" class="btn-primary">Create Account</button>
+
+                <div class="switch-link" style="margin-top:20px;">
+                    Already have an account? <a href="#" id="show-login-link">Sign in &rarr;</a>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="#" class="back-to-home" style="color: var(--muted-text); font-size: 13px; text-decoration: none; font-weight: 500;">&larr; Back to Home</a>
+                </div>
+                <p class="terms">By signing up you'll receive workout tips, progress updates<br/>and exclusive member offers.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Main Dashboard Layout -->
+    <div class="dashboard-layout" style="display: none;">
+
+        <!-- Floating Glass Sidebar -->
+        <aside class="sidebar">
+            
+            <div class="navLinks">
+                <div class="tab tab-button active" data-target="overview-tab">
+                    <i class="bi bi-grid"></i>
+                    <span>Overview</span>
+                </div>
+                <div class="tab tab-button" data-target="analytics-tab">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Analytics</span>
+                </div>
+                <div class="tab tab-button" data-target="settings-tab">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+            
+            <div class="bottomArea">
+                <button class="upgradeBtn" id="upgrade-plan-btn">
+                    Upgrade Plan
+                </button>
+                <div class="profileCard">
+                    <img id="sidebar-avatar" src="./asstes/images/image copy.png" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150';" alt="Profile">
+                    <div>
+                        <h4 id="sidebar-name">User@1234</h4>
+                        <p id="sidebar-role">Member</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Unified Premium Glass Floating Top Header -->
+        <header class="ultraGlassHeader">
+            <!-- Left Side: Dynamic Toggle and Branding -->
+            <div class="ultraHeaderLeft" style="display: flex; align-items: center; gap: 15px;">
+                <div class="toogle" id="sidebar-toggle-btn" style="box-shadow: none;">
+                    <div class="toogleI">
+                        <i class="bi bi-list"></i>
+                    </div>
+                </div>
+                <div class="mainlogofitness">
+                    <h1>ELEVATE FITNESS</h1>
+                    <p id="header-role">Premium Member Access</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Notification Trigger -->
+            <div class="ultraHeaderRight">
+                <div class="glassNotify" id="notification-btn" aria-label="Notifications">
+                    <i class="bi bi-bell" style="font-size: 1.25rem; color: #fff;"></i>
+                    <span class="badge" id="notification-badge" style="display: none;"></span>
+                </div>
+                <!-- Notification Dropdown -->
+                <div class="notification-dropdown hidden" id="notification-dropdown" style="top: 80px; right: 0;">
+                    <p>No recent notifications</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Overview Tab (Background video, Glass metrics, and Quotes) -->
+            <section id="overview-tab" class="tab-content active-content" style="padding: 0; border: none; background: transparent;">
+                
+                <!-- Background Classic Image Hero Header -->
+                <div class="heroVideoSection" id="hero">
+                    <div class="heroText">
+                        <p class="hero-tagline">MEMBER DASHBOARD</p>
+                        <h1><span id="dynamic-greeting">Welcome</span>, <span id="hero-username">User</span></h1>
+                        <p class="hero-subtext">Real-time performance metrics for Elite Fitness today.</p>
+                    </div>
+                </div>
+
+                <!-- Glass Metric Performance Cards -->
+                <div class="glassCardsWrap">
+                    <!-- CARD 1: Active Plan -->
+                    <div class="glassCard">
+                        <div class="cardIcon">
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <div class="cardContent">
+                            <h1 id="active-plan-val">Basic</h1>
+                            <h3>Active Plan</h3>
+                            <p id="plan-type-val">New Member</p>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: Total Sessions -->
+                    <div class="glassCard">
+                        <div class="cardTop">
+                            <div class="cardIcon">
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <div class="smallTag" id="sessions-trend-tag">
+                                +3 this week
+                            </div>
+                        </div>
+                        <div class="cardContent">
+                            <h1 id="sessions-val">10 <span>.</span></h1>
+                            <h3>Total Sessions</h3>
+                            <p>All time</p>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: Fit Points -->
+                    <div class="glassCard" id="points-card">
+                        <div class="cardTop">
+                            <div class="cardIcon">
+                                <i class="bi bi-lightning"></i>
+                            </div>
+                            <div class="smallTag live">
+                                Live
+                            </div>
+                        </div>
+                        <div class="cardContent">
+                            <h1 id="rewards-val">0 <span>.</span></h1>
+                            <h3>Fit Points</h3>
+                            <p>Points earned</p>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: Expiry Countdown -->
+                    <div class="glassCard" id="expiry-card">
+                        <div class="cardIcon">
+                            <i class="bi bi-calendar3"></i>
+                        </div>
+                        <div class="cardContent" id="expiry-card-content">
+                            <h1 id="expiry-val">Dec 31</h1>
+                            <h3>Expiry Date</h3>
+                            <p id="expiry-year-val">2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Member Profile Details Card -->
+                <div class="profileDetailsCard" id="member-profile-card">
+                    <div class="profileCardHeader">
+                        <h2>Profile</h2>
+                        <p>Member details</p>
+                    </div>
+                    <div class="profileDetailsGrid">
+                        <div class="profileDetailItem">
+                            <p class="detailLabel">Age</p>
+                            <h3 id="prof-age">--</h3>
+                        </div>
+                        <div class="profileDetailItem">
+                            <p class="detailLabel">Height</p>
+                            <h3 id="prof-height">--</h3>
+                        </div>
+                        <div class="profileDetailItem">
+                            <p class="detailLabel">Weight</p>
+                            <h3 id="prof-weight">--</h3>
+                        </div>
+                        <div class="profileDetailItem">
+                            <p class="detailLabel">Goal</p>
+                            <h3 id="prof-goal">--</h3>
+                        </div>
+                        <div class="profileDetailItem">
+                            <p class="detailLabel">Member ID</p>
+                            <h3 id="prof-id">--</h3>
+                        </div>
+                        <div class="profileDetailItem">
+                            <p class="detailLabel">Retention</p>
+                            <h3 id="prof-retention">--</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motivational Quotes Grid -->
+                <section class="quoteGridSection">
+                    <!-- Quote 1 -->
+                    <div class="quoteCard">
+                        <div class="quoteImage">
+                            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=600" onerror="this.src='./asstes/images/specailimage4.png';" alt="Discipline Focus">
+                        </div>
+                        <div class="quoteContent">
+                            <p>Discipline is choosing between what you want now and what your future self demands.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quote 2 -->
+                    <div class="quoteCard">
+                        <div class="quoteImage">
+                            <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=600" onerror="this.src='./asstes/images/gymimg3.png';" alt="Growth Effort">
+                        </div>
+                        <div class="quoteContent">
+                            <p>Comfort is silent. Growth sounds like heavy breathing, failed attempts, and another repetition.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quote 3 -->
+                    <div class="quoteCard">
+                        <div class="quoteImage">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600" onerror="this.src='./asstes/images/SpecialGymImgae.png';" alt="Forging Strength">
+                        </div>
+                        <div class="quoteContent">
+                            <p>The strongest people are forged when quitting becomes seductive.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quote 4 -->
+                    <div class="quoteCard">
+                        <div class="quoteImage">
+                            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&q=80&w=600" onerror="this.src='./asstes/images/specialIMagegym.png';" alt="Mindset over Matter">
+                        </div>
+                        <div class="quoteContent">
+                            <p>Your body hears everything your mind says. Stop teaching it weakness.</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-tab" class="tab-content hidden" style="padding: 0;">
+                <div class="dashboard-content-shift">
+                    <div class="space-y-6 max-w-[1600px] mx-auto w-full">
+                        
+                        <!-- Banner Section -->
+                        <section class="analytics-banner">
+                            <div class="absolute inset-0 opacity-15 pointer-events-none">
+                                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=1000" alt="" class="w-full h-full object-cover">
+                            </div>
+                            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                <div>
+                                    <h1 class="text-2xl sm:text-3xl font-bold mb-2">Membership Analysis</h1>
+                                    <p class="text-sm max-w-md">Real-time engagement metrics and facility performance across all active zones.</p>
+                                </div>
+                                <div class="timeframe-selector flex p-1 rounded-xl self-start md:self-center">
+                                    <button onclick="changeTimeframe('weekly', this)" class="filter-btn px-4 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer">Weekly</button>
+                                    <button onclick="changeTimeframe('monthly', this)" class="filter-btn px-4 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer">Monthly</button>
+                                    <button onclick="changeTimeframe('yearly', this)" class="filter-btn active px-4 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer">Yearly</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Top Grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Large Chart distribution -->
+                            <div class="lg:col-span-2 glass-card rounded-3xl p-6">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div>
+                                        <h3 class="font-bold text-lg">Active Minutes</h3>
+                                        <p class="text-xs text-muted">Workout duration in minutes</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-xs text-green-500 font-bold">↗️ 12%</span>
+                                    </div>
+                                </div>
+                                <div class="chart-container" style="height: 300px; min-height: 300px; position: relative;">
+                                    <canvas id="attendanceChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Capacity Card -->
+                            <div class="flex flex-col gap-6">
+                                <div class="glass-card rounded-3xl p-6 flex-1 flex flex-col justify-center">
+                                    <h3 class="text-sm font-medium text-muted mb-2 uppercase tracking-widest">Goal Progress</h3>
+                                    <div class="text-5xl sm:text-6xl font-bold gold-gradient-text" id="capacity-val">65%</div>
+                                    <div class="mt-4 flex items-center gap-2 text-sm text-green-500">
+                                        <span>↑ 5%</span>
+                                        <span class="text-muted">vs last period</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Middle Row -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                            <!-- Exercise Breakdown -->
+                            <div class="glass-card rounded-3xl p-6">
+                                <h3 class="text-sm font-semibold mb-4">Exercise Breakdown</h3>
+                                <div class="relative" style="height: 180px; position: relative;">
+                                    <canvas id="analyticsUsageChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Session Distribution Bar Chart -->
+                            <div class="glass-card rounded-3xl p-6">
+                                <h3 class="font-bold mb-4">Session Distribution</h3>
+                                <div class="" style="height: 160px; position: relative;">
+                                    <canvas id="sessionChart"></canvas>
+                                </div>
+                                <p class="text-xs text-muted mt-4 leading-relaxed"><i class="fa-regular fa-lightbulb text-amber-500 mr-1"></i> Peak activity shows most members sustain training sessions between 60 to 90 minutes.</p>
+                            </div>
+
+                            <!-- Stats Quick View -->
+                            <div class="grid grid-cols-1 gap-4">
+                                <div class="glass-card rounded-2xl p-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center text-xl" style="background-color: var(--bg-color); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px;">🕒</div>
+                                    <div>
+                                        <p class="text-muted text-[10px] uppercase font-bold tracking-wider">Avg. Time</p>
+                                        <h4 class="text-xl font-bold" id="stat-avg-time">1h 20m</h4>
+                                    </div>
+                                </div>
+                                <div class="glass-card rounded-2xl p-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center text-xl" style="background-color: var(--bg-color); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px;">🔥</div>
+                                    <div>
+                                        <p class="text-muted text-[10px] uppercase font-bold tracking-wider">Total Burn</p>
+                                        <h4 class="text-xl font-bold" id="stat-calories">420,000</h4>
+                                    </div>
+                                </div>
+                                <div class="glass-card rounded-2xl p-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center text-xl" style="background-color: var(--bg-color); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px;">❤️</div>
+                                    <div>
+                                        <p class="text-muted text-[10px] uppercase font-bold tracking-wider">Consistency</p>
+                                        <h4 class="text-xl font-bold" id="stat-retention">89%</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Card -->
+                        <div class="glass-card rounded-3xl p-6">
+                            <h3 class="font-bold mb-6 flex items-center gap-2">
+                                <span>🚩</span> Personal Milestones
+                            </h3>
+                            
+                            <div class="space-y-6">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-xs font-medium">
+                                        <span class="text-muted">Calories Burned</span>
+                                        <span id="label-cal" class="font-semibold" style="color: var(--text-color);">420k / 500k</span>
+                                    </div>
+                                    <div class="h-2 rounded-full overflow-hidden" style="height: 8px; background-color: var(--bg-color); border-radius: 9999px;">
+                                        <div id="bar-cal" class="h-full bg-[#d4af37] shadow-[0_0_10px_rgba(212,175,55,0.4)] transition-all duration-1000" style="width: 84%; height: 100%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-xs font-medium">
+                                        <span class="text-muted">Weight Goal</span>
+                                        <span id="label-weight" class="font-semibold" style="color: var(--text-color);">15 / 20 kg</span>
+                                    </div>
+                                    <div class="h-2 rounded-full overflow-hidden" style="height: 8px; background-color: var(--bg-color); border-radius: 9999px;">
+                                        <div id="bar-weight" class="h-full bg-[#e8ddcb] shadow-[0_0_10px_rgba(232,221,203,0.4)] transition-all duration-1000" style="width: 75%; height: 100%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-xs font-medium">
+                                        <span class="text-muted">Monthly Hours</span>
+                                        <span id="label-time" class="font-semibold" style="color: var(--text-color);">50 / 60h</span>
+                                    </div>
+                                    <div class="h-2 rounded-full overflow-hidden" style="height: 8px; background-color: var(--bg-color); border-radius: 9999px;">
+                                        <div id="bar-time" class="h-full bg-[#c27a3f] shadow-[0_0_10px_rgba(194,122,63,0.4)] transition-all duration-1000" style="width: 83%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-tab" class="tab-content hidden">
+                <div class="dashboard-content-shift">
+                    <div class="settings-container">
+                        <div class="settings-card">
+                            <h3>Profile Settings</h3>
+                            <form class="settings-form" onsubmit="event.preventDefault();">
+                                <div class="form-group">
+                                    <label for="fullName">Name</label>
+                                    <input type="text" id="fullName" value="User 134" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" value="user134@fitindia.com" class="form-input">
+                                </div>
+                                <button class="btn btn-light">Save Changes</button>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Notification Preferences</h3>
+                            <div class="preference-item">
+                                <div class="pref-info">
+                                    <h4 class="text-uppercase">EMAIL ALERTS</h4>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="preference-item">
+                                <div class="pref-info">
+                                    <h4 class="text-uppercase">SESSION REMINDERS</h4>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card danger-zone">
+                            <h3>Account & Display Options</h3>
+                            
+                            <div class="preference-item" style="border-bottom: 1px solid var(--border-color); margin-bottom: 1.5rem; padding-bottom: 1.5rem;">
+                                <div class="pref-info">
+                                    <h4 class="text-uppercase">DARK MODE</h4>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="theme-toggle" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button id="logout-btn" class="btn btn-outline">Log Out</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ================= MEMBERSHIP MODAL ================= -->
+    <div class="membershipModal">
+        <div class="membershipBox">
+            <button class="closeMembership" aria-label="Close modal">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <h1>Choose Your Fitness Plan</h1>
+            <p class="subText">Upgrade and unlock premium fitness features</p>
+
+            <div class="planWrap">
+                <!-- BASIC -->
+                <div class="planCard" data-plan="Basic">
+                    <h2>Basic</h2>
+                    <div class="price">
+                        ₹999<span>/month</span>
+                    </div>
+                    <ul>
+                        <li>✔ Gym Floor Access</li>
+                        <li>✔ Cardio Zone Access</li>
+                        <li>✔ Locker Facility</li>
+                        <li>✔ 1 Trainer Consultation</li>
+                        <li>✘ Personal Coach</li>
+                        <li>✘ Diet Plan</li>
+                    </ul>
+                    <button class="select-plan-btn">Select Plan</button>
+                </div>
+
+                <!-- ADVANCED -->
+                <div class="planCard activePlan" data-plan="Advanced">
+                    <div class="popularTag">MOST POPULAR</div>
+                    <h2>Advanced</h2>
+                    <div class="price">
+                        ₹2499<span>/month</span>
+                    </div>
+                    <ul>
+                        <li>✔ Unlimited Gym Access</li>
+                        <li>✔ Group Training Sessions</li>
+                        <li>✔ Weekly Fitness Assessment</li>
+                        <li>✔ Customized Diet Guide</li>
+                        <li>✔ Steam & Shower Access</li>
+                        <li>✘ Dedicated Personal Trainer</li>
+                    </ul>
+                    <button class="select-plan-btn">Select Plan</button>
+                </div>
+
+                <!-- PREMIUM -->
+                <div class="planCard" data-plan="Premium">
+                    <h2>Premium</h2>
+                    <div class="price">
+                        ₹4999<span>/month</span>
+                    </div>
+                    <ul>
+                        <li>✔ Dedicated Personal Trainer</li>
+                        <li>✔ AI Progress Tracking</li>
+                        <li>✔ Personalized Meal Plan</li>
+                        <li>✔ Unlimited Group Sessions</li>
+                        <li>✔ Recovery & Spa Access</li>
+                        <li>✔ VIP Fitness Lounge</li>
+                    </ul>
+                    <button class="select-plan-btn">Select Plan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
